@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+  {% load static %}
+  <head>
+    <meta charset='utf-8' />
+    <link href="{% static 'calend/lib/main.css' %}" rel='stylesheet' />
+    <script src="{% static 'calend/lib/main.css' %}"></script>
+    <script src="{% static 'calend/lib/locales-all' %}"></script>
+    
+  <body>
+    <div id='calendar'></div>
+  </body>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var initialLocaleCode = 'fr';
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        themeSystem: 'bootstrap5',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        locale: initialLocaleCode,
+        navLinks: true, // can click day/week names to navigate views
+        businessHours: true, // display business hours
+        editable: true,
+        selectable: true,
+        weekNumbers: true,
+        dayMaxEvents: true, // allow "more" link when too many events             
+      });
+      calendar.render();
+    });
+  </script>
+  </head>
+
+</html>

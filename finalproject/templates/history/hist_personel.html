@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wai+Doc</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'historique/histo.css' %}">
+    
+    
+        <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
+    rel="stylesheet"
+    />
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'new_home_page/css/homepage1.css' %}">    
+    {% load custom_tags %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+     <!-- Container wrapper -->
+     <div class="container-fluid">
+       <!-- Toggle button -->
+       <button
+         class="navbar-toggler"
+         type="button"
+         data-mdb-toggle="collapse"
+         data-mdb-target="#navbarSupportedContent"
+         aria-controls="navbarSupportedContent"
+         aria-expanded="false"
+         aria-label="Toggle navigation"
+       >
+       <i class="bi bi-list"></i>
+       </button>
+   
+       <!-- Collapsible wrapper -->
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <!-- Navbar brand -->
+         <a class="navbar-brand mt-2 mt-lg-0" href="#">
+           <img
+             src="{% static 'img/logo.svg'%}"
+             height="25"
+             loading="lazy"
+             
+           />
+         </a>
+         <!-- Left links -->
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item">
+             <a class="nav-link" href="/" id="coloritems">Home</a>
+           </li>
+           {% if request.user.is_doctor%}
+           <li class="nav-item">
+             <a class="nav-link" href="/calendar" id="coloritems">Calendrier</a>
+           </li>
+           <li class="nav-item">
+             <a class="nav-link" href="/all-event-list" id="coloritems">Liste d'attente</a>
+           </li>
+           {% if request.user.is_authenticated %}
+           <li class="nav-item">
+             <div class="dropdown" >
+             <a class="nav-link" id="coloritems" href="{{lien}}" data-mdb-toggle="dropdown" aria-expanded="false">
+                 Historique
+               <div class="dropdown-menu" style="width: 250px">
+                 <form class="px-4 py-3" action="">
+                   <div class="form-outline mb-4">
+                     <input type="password" id="form2Example2" name ="pin" class="form-control"/>
+                     <label class="form-label" for="form2Example2" name ="pin" id="pin">Code pin</label>
+                   </div>
+                   <button type="submit" class="btn btn-primary btn-block" name="submit">Entrer</button>
+                 </form>
+             </a></div>
+           </li>
+           {% endif %}
+           {% endif %}
+   
+           
+           <li class="nav-item" >
+             <a class="nav-link" href="/listpage/" id="coloritems">listmed</a>
+           </li>
+   
+         {% if request.user.is_staff%}
+         <li class="nav-item">
+             <a class="nav-link" href="/staff" id="coloritems">Staff</a>
+           </li>
+   
+         {% endif %}
+   
+         <li class="nav-item">
+             <a class="nav-link" href="/general_info" id="coloritems">General info</a>
+           </li>
+   
+         <li class="nav-item">
+             <a class="nav-link" href="/subjects" id="coloritems">Annonce</a>
+           </li>
+   
+           
+         </ul>                      
+         <!--<div style="padding-right:30px"  >
+           <button style="border-radius:15px;background-color:#4d47c3;color:#fff;
+           height:36px;font:caption"><a id="colorbuttonw">Vous êtes un professionnel de santé ?</a></button>
+         </div>
+       -->
+         <!-- Left links -->
+       </div>
+       <!-- Collapsible wrapper -->
+   
+       <!-- Right elements -->
+       <div class="d-flex align-items-center">
+         <!--icon-->
+             
+         <!-- Notifications -->
+         {%show_notifications%}
+         <!-- Avatar Account -->
+         <div class="dropdown">
+           <a
+             class="dropdown-toggle d-flex align-items-center hidden-arrow"
+             href="#"
+             id="navbarDropdownMenuAvatar"
+             role="button"
+             data-mdb-toggle="dropdown"
+             aria-expanded="false"
+           >
+             <img
+               src="{% static 'new_home_page/img/user.svg'%}"
+               class="rounded-circle"
+               height="50"
+               alt="Black and White Portrait of a Man"
+               loading="lazy"
+             />
+           </a>
+           <ul
+             class="dropdown-menu dropdown-menu-end"
+             aria-labelledby="navbarDropdownMenuAvatar"
+           >
+             <li>
+               <a class="dropdown-item" href="/account">Mon profile</a>
+             </li>
+             <li>
+               <a class="dropdown-item" href="/logout">logout</a>
+             </li>
+           </ul>
+         </div>
+       </div>
+       <!-- Right elements -->
+     </div>
+     <!-- Container wrapper -->
+   </nav>
+   <br><br><br>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="carte rounded left mt-2">
+                    <div class="card-block text-center text-black">
+                        <img class="user-icon mt-5" src="/images/id-card-solid.svg" style="height: 20%;width: 20%">
+                        <h4 class="font-weght-bold mt-4">Name : {{patient.first_name}} {{patient.last_name}}</h4>
+                        <p><a href="#" class="text-decoration-none">Email : {{patient.email}}</a></p>
+                        <p><a href="#" class="text-decoration-none">Téléphone : {{patient.phone_number}}</a></p>
+                        <p><a href="#" class="text-decoration-none">Ville : {{patient.ville}}</a></p>
+                        <a href="#"><i class="far fa-edit fa-2x mb-4"></i></a> 
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="text">
+                        <ul>
+                            <h6><span class="text2">Antécédants médicaux</span></h6>
+                            <li>First</li>
+                            <li>Second</li>
+                            <li>Third</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <nav class="navbar2 navbar-light bg-light mb-2 pt-2 pb-2">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    <input type="date" id="myInput" placeholder="Tapez la date">
+                    <input type="time" id="myInput" placeholder="Tapez l'heure souhaitée'">
+                    <button class="btn btn-outline-success" id="bouton" type="submit">Rechercher</button>
+                    </form>
+            </div>
+                <!--one occurence of the same profile-->
+                <ul class='list-group-flush' id="myUL">
+                    <!--one profile as such-->
+                    
+                        {%for rdv in hperso%}
+                        <li class="list-group-item" style="background-color: light;">
+                        <div id="profile">
+                            <a class="inner" id="text-consultation" style="height: 50px; text-align: center;" href="#">{{rdv.start_time|date:"y-m-d"}}</a>
+                            <a class="inner" id="text-heure" style="height: 50px;" href="#">{{rdv.start_time|date:"h:i"}}</a>
+                            <a class="inner" id="text-ordonnance" style="height: 50px;" href="{% url 'historique:ordonance' rdv.id %}">ORDONNANCE<i class="pen-icon fa-solid fa-pen-clip"></i></a>
+                            <a class="inner" id="text-view" style="height: 50px;" href="{%url 'historique:pdf ordo' rdv.id %}"><img src="/images/eye-solid.svg" class="view-icon"></a>
+
+                    </div>
+                    </li>
+                        {%endfor%}
+                    
+                </ul>
+            </div>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

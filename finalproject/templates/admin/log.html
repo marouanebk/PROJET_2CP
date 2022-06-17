@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prise de rendez vous </title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'log/log.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'new_home_page/css/homepage1.css' %}">
+<link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+
+
+
+
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+          <i class="bi bi-list"></i>
+          </button>
+      
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+              <img
+                src="{% static 'img/logo.svg'%}"
+                height="25"
+                loading="lazy"
+                
+              />
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/" id="coloritems">Home</a>
+              </li>
+              {% if request.user.is_doctor%}
+              <li class="nav-item">
+                <a class="nav-link" href="/calendar" id="coloritems">Calendrier</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/all-event-list" id="coloritems">Liste d'attente</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <div class="dropdown" >
+                <a class="nav-link" id="coloritems" href="/historique" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Historique
+                  <div class="dropdown-menu" style="width: 250px">
+                    <form class="px-4 py-3" action="">
+                      <div class="form-outline mb-4">
+                        <input type="password" id="form2Example2" name ="pin" class="form-control"/>
+                        <label class="form-label" for="form2Example2" name ="pin" id="pin">Code pin</label>
+                      </div>
+                     <a href="/historique"> <button type="button" href="/historique" class="btn btn-primary btn-block" name="submit">  Entrer</button></a>
+                    </form>
+                </a></div>
+              </li>
+              {% endif %}
+              {% endif %}
+
+              
+              <li class="nav-item" >
+                <a class="nav-link" href="/listpage/" id="coloritems">listmed</a>
+              </li>
+
+            {% if request.user.is_staff%}
+            <li class="nav-item">
+                <a class="nav-link" href="/staff" id="coloritems">Staff</a>
+              </li>
+
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="/general_info" id="coloritems">General info</a>
+              </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/subjects" id="coloritems">Annonce</a>
+              </li>
+
+              
+            </ul>
+            
+            {% if request.user.is_patient%}
+            <div style="padding-right:30px"  >
+              <button style="border-radius:15px;background-color:#4d47c3;color:#fff;
+              height:36px;font:caption"><a href="/request"style="color:white;" id="colorbuttonw">Vous êtes un professionnel de santé ?</a></button>
+            </div>
+            {% endif %}
+          
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
+            <!--icon-->
+            
+
+            {% if request.user.is_authenticated %}
+
+            <!-- Notifications -->
+            <!-- Avatar Account -->
+            <div class="dropdown">
+              <a
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="{% static 'new_home_page/img/user.svg'%}"
+                  class="rounded-circle"
+                  height="50"
+                  alt="Black and White Portrait of a Man"
+                  loading="lazy"
+                />
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+              >
+                <li>
+                  <a class="dropdown-item" href="/account">Mon profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/logout">logout</a>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+          <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+
+
+
+
+
+
+    <section id="appointment" style="padding-top: 100px;">
+      <div class="container">
+        <div class="formulaire">
+          <h3>S'inscrire a la  plateforme?c'est possible on vous recontactera</h3>
+          <form action="#" method="post">
+            {%csrf_token%}
+            <div class="form-outline">
+              <input type="text" id="form12" name="name" value="  {{form.first_name}}" class="form-control" style="background-color:whitesmoke;height: 45px;" />
+              <label class="form-label" for="form12">Nom</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="form12" class="form-control" value="  {{form.last_name}}"name="email" style="background-color:whitesmoke;height: 45px;" />
+              <label class="form-label" for="form12">Prenom</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="form12" name="owner" id="owner" class="form-control" value="  {{form.email}}" style="background-color:whitesmoke;height: 45px;" />
+              <label class="form-label" for="form12">Email</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="form12" class="form-control" value="  {{form.phone_number}}"  style="background-color:whitesmoke;height: 45px;"/>
+              <label class="form-label" for="form12">Numero de telephone</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="form12" name="speciality" class="form-control" style="background-color:whitesmoke;height: 45px;" />
+              <label class="form-label" for="form12" >Specialite</label>
+            </div>
+            <div class="form-outline">
+              <input type="text" id="form12" name="location" class="form-control" style="background-color:whitesmoke" />
+              <label class="form-label" for="form12" >Link (google map) </label>
+            </div>
+            <input name="description" id="description" placeholder="Info"name="info" type="text" required="" class="infor">
+            
+            <button class="submit-btn" type="submit" >Soumettre </button>
+          </form>
+        </div>
+        <div class="formulaire-image">
+          <img src="{% static 'log/log.jpg' %}" alt="">
+        </div>
+      </div>
+    </section>
+    <!-- //Formulaire rendez-vous  -->
+
+
+
+    
+
+
+
+<script src="./js/animnav.js"></script>
+   
+</body>
+
+
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+       <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>register</title>
+        {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}">
+  </head>
+    <style >
+    body{
+      background-image:url("{% static 'img/JjvMpm.jpg' %}") ;
+    }
+  </style>
+  <body>
+
+
+    <section class="intro">
+        <div id="bgimg" class="bg-image h-100" style="background-image: url('./img/JjvMpm.jpg');">
+
+<!--           <div id="bgimg" class="bg-image h-100" style="background-image: url('./img/JjvMpm.jpg');"> -->
+
+          <div class="mask d-flex align-items-center h-100" >
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div class="card gradient-custom" style="border-radius: 2rem;">
+                    <div class="card-body p-5 text-white">
+      
+                      <div class="my-md-5">
+      
+                        <div class="text-center pt-1">
+                          <i class="fas fa-user-astronaut fa-3x"></i>
+                          <h1 class="fw-bold my-5">Inscrivez-vous</h1>
+                        </div>
+                        <form class="form-signup" method="POST">
+                            {% csrf_token %}
+
+                          <div class="form-outline form-white mb-4">
+                             <input type="email" name="email" id="inputEmail" class="form-control form-control-md" placeholder="Email address" required autofocus>
+                            
+                          </div>
+                          <div class="form-outline form-white mb-4">
+                            <input type="text" name="username" id="inputUsername" class="form-control form-control-md" placeholder="Username" required>
+                          </div>                        
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="text" name="first_name" id="inputFirstName" class="form-control form-control-md" placeholder="First name" required>
+                        </div>
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="text" name="last_name" id="inputLastName" class="form-control form-control-md" placeholder="Last Name" required>
+                        </div>
+
+<!--                         <div class="form-outline form-white mb-4">
+                            <input type="text" name="last_name" id="inputLastName" class="form-control form-control-md" placeholder="Last Name" required>
+                        </div> -->
+
+                        <div class="form-outline form-white mb-4">
+                          <input type="password" name="password1" id="inputPassword1" class="form-control form-control-md" placeholder="Password" required>
+                        </div>
+      
+                        <div class="form-outline form-white mb-4">
+                          <input type="password" name="password2" id="inputPassword2" class="form-control form-control-md" placeholder="Confirm password" required>
+                        </div>
+      
+                        <div class="text-center py-3">
+                      {% for field in registration_form %}
+                      <p>
+                        {% for error in field.errors %}
+                          <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                          </p>
+                      {% endfor %}
+                          <button class="btn btn-light btn-lg btn-rounded px-5" type="submit">S'inscrire</button>
+                        </div>
+                                              </form>
+
+      
+                      </div>
+      
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+   
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>

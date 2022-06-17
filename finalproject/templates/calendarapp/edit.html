@@ -1,0 +1,11 @@
+                    {% for event in events_month %}
+                        {% if event.is_active == True%}
+                      <div class="fc-event">
+                          <h3>{{ event.Phone_number }}</h3>
+                          <h3>receiver : {{ event.Receiver }}</h3>
+                          <p>At: {{ event.start_time }}</p>
+                      </div>
+                        {% endif %}
+                    {% empty %}
+                      <p>No Running Events Found</p>
+                    {% endfor %}

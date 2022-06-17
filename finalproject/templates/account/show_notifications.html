@@ -1,0 +1,33 @@
+
+<div class="dropdown">
+    <a
+      class=" nav-link dropdown-toggle"
+      href="#"
+      id="navbarDropdownMenuLink"
+      role="button"
+      data-mdb-toggle="dropdown"
+      aria-expanded="false"
+    >
+    <div style="padding-left:28.5px;">
+    {%if not notifications.count is 0 %}
+    <span class="badge bg-primary notification-badge"  onclick="showNotifications()">{{ notifications.count }}</span>    
+    {%endif%}
+    </div>
+    <i class="bi bi-bell-fill" style="font-size: 7mm; color: #000000;"></i>
+    </a>
+    <ul
+      class="dropdown-menu dropdown-menu-end"
+      aria-labelledby="dropdownMenuButton1"
+    >
+    {% for notification in notifications %}
+    <div class="dropdown-item-parent" style="width: 350px;padding-left: 2%;">
+        {%if notification.reminder%}
+        <a href="" class="text-dark" style="text-decoration:none;" > vous avez un rendez_vous avec Dr.{{ notification.from_user.first_name }} aujourd'hui</a>
+        {%else%}
+        <a href=""> votre rendez_vous avec Dr.{{ notification.from_user.first_name }} a ete apprové</a>
+        {%endif%}
+        <span class="dropdown-item-close" onclick="removeNotification()">&times;</span>
+    </div>
+      {% endfor %}     
+    </ul>
+  </div>
